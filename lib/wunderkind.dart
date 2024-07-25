@@ -8,10 +8,6 @@ import 'models/wunderkind_order.dart';
 import 'wunderkind_platform_interface.dart';
 
 class Wunderkind {
-  Future<String?> getPlatformVersion() {
-    return WunderkindPlatform.instance.getPlatformVersion();
-  }
-
   static Future<void> initialize({
     required String webId,
     bool? isDebugMode,
@@ -22,12 +18,12 @@ class Wunderkind {
     );
   }
 
-  Future<void> setIsContextInfoTrackingEnabled(bool enabled) async {
+  static Future<void> setIsContextInfoTrackingEnabled(bool enabled) async {
     return await WunderkindPlatform.instance
         .setIsContextInfoTrackingEnabled(enabled);
   }
 
-  Future<void> trackScreenView({
+  static Future<void> trackScreenView({
     required String url,
     required ScreenType screen,
   }) async {
@@ -35,11 +31,11 @@ class Wunderkind {
         .trackScreenView(url: url, screen: screen);
   }
 
-  Future<void> trackEmptyCart() async {
+  static Future<void> trackEmptyCart() async {
     return await WunderkindPlatform.instance.trackEmptyCart();
   }
 
-  Future<void> trackViewItem({
+  static Future<void> trackViewItem({
     required String itemId,
     required String groupId,
   }) async {
@@ -47,7 +43,7 @@ class Wunderkind {
         .trackViewItem(itemId: itemId, groupId: groupId);
   }
 
-  Future<void> trackSelectSku({
+  static Future<void> trackSelectSku({
     required String groupId,
     required String feedId,
   }) async {
@@ -55,16 +51,17 @@ class Wunderkind {
         .trackSelectSku(groupId: groupId, feedId: feedId);
   }
 
-  Future<void> trackAddToCart({required String itemId}) async {
+  static Future<void> trackAddToCart({required String itemId}) async {
     return await WunderkindPlatform.instance.trackAddToCart(itemId: itemId);
   }
 
-  Future<void> trackViewCategory({required WunderkindCategory category}) async {
+  static Future<void> trackViewCategory(
+      {required WunderkindCategory category}) async {
     return await WunderkindPlatform.instance
         .trackViewCategory(category: category);
   }
 
-  Future<void> trackViewSearch({
+  static Future<void> trackViewSearch({
     required WunderkindCategory searchCategory,
   }) async {
     return await WunderkindPlatform.instance.trackViewSearch(
@@ -72,23 +69,23 @@ class Wunderkind {
     );
   }
 
-  Future<void> trackLoggedIn(WunderkindCustomer customer) async {
+  static Future<void> trackLoggedIn(WunderkindCustomer customer) async {
     return await WunderkindPlatform.instance.trackLoggedIn(customer);
   }
 
-  Future<void> trackLoggedOut() async {
+  static Future<void> trackLoggedOut() async {
     return await WunderkindPlatform.instance.trackLoggedOut();
   }
 
-  Future<void> trackTextOptIn({required String phone}) async {
+  static Future<void> trackTextOptIn({required String phone}) async {
     return await WunderkindPlatform.instance.trackTextOptIn(phone: phone);
   }
 
-  Future<void> trackPurchase(WunderkindOrder order) async {
+  static Future<void> trackPurchase(WunderkindOrder order) async {
     return await WunderkindPlatform.instance.trackPurchase(order);
   }
 
-  Future<void> setLogLevel(LogLevel level) async {
+  static Future<void> setLogLevel(LogLevel level) async {
     return await WunderkindPlatform.instance.setLogLevel(level);
   }
 }

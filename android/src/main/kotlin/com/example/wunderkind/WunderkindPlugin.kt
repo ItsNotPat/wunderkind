@@ -35,8 +35,7 @@ class WunderkindPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onMethodCall(call: MethodCall, result: Result) {
     when (call.method) {
-      "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
-      "initialize" -> handleCall(result) {
+     "initialize" -> handleCall(result) {
         val webId = call.argument<String>("webId")!!
         val isDebugMode = call.argument<Boolean>("isDebugMode")!!
         Wunderkind.getInstance().initialize(context, webId.toLong(), isDebugMode)
@@ -94,7 +93,9 @@ class WunderkindPlugin: FlutterPlugin, MethodCallHandler {
         val email = call.argument<String>("email")!!
         Wunderkind.getInstance().trackLoggedIn(phone, email)
       }
-      "trackLoggedOut" -> handleCall(result) { Wunderkind.getInstance().trackLoggedOut() }
+      "trackLoggedOut" -> handleCall(result) {
+        Wunderkind.getInstance().trackLoggedOut()
+      }
       "trackTextOptIn" -> handleCall(result) {
         val phone = call.argument<String>("phone")!!
         Wunderkind.getInstance().trackTextOptIn(phone)

@@ -116,7 +116,5 @@ void main() {
     Wunderkind wunderkindPlugin = Wunderkind();
     MockWunderkindPlatform fakePlatform = MockWunderkindPlatform();
     WunderkindPlatform.instance = fakePlatform;
-
-    expect(await wunderkindPlugin.getPlatformVersion(), '42');
   });
 }

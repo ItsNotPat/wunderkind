@@ -28,10 +28,6 @@ abstract class WunderkindPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
-
   //Initialize Wunderkind
   //Get Web Id from wunderkind
   Future<void> initialize({

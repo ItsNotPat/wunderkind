@@ -20,7 +20,7 @@ class WunderkindOrder {
 
   factory WunderkindOrder.fromJson(Map<String, dynamic> map) {
     return WunderkindOrder(
-      orderId: map['productId'],
+      orderId: map['orderId'],
       invoice: WunderkindInvoice.fromJson(map['invoice']),
       paymentMethod: map['paymentMethod'],
       customer: WunderkindCustomer.fromJson(map['customer']),
