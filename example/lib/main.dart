@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:wunderkind/models/currency.dart';
+import 'package:wunderkind/models/log_level.dart';
 import 'package:wunderkind/models/screen_type.dart';
 import 'package:wunderkind/models/wunderkind_category.dart';
 import 'package:wunderkind/models/wunderkind_customer.dart';
+import 'package:wunderkind/models/wunderkind_invoice.dart';
+import 'package:wunderkind/models/wunderkind_order.dart';
+import 'package:wunderkind/models/wunderkind_product.dart';
 import 'package:wunderkind/wunderkind.dart';
 
 void main() {
@@ -115,9 +120,54 @@ class _MyAppState extends State<MyApp> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  WunderkindOrder order = WunderkindOrder(
+                    orderId: "order001",
+                    invoice: WunderkindInvoice(
+                      amount: 300,
+                      tax: 12.0,
+                      shipping: 10,
+                      currency: Currency.gbp,
+                    ),
+                    products: [
+                      WunderkindProduct(
+                        productId: "product_id",
+                        sku: "sku",
+                        price: 100,
+                        quantity: 1,
+                      ),
+                      WunderkindProduct(
+                        productId: "product_id",
+                        sku: "sku",
+                        price: 100,
+                        quantity: 1,
+                      ),
+                      WunderkindProduct(
+                        productId: "product_id",
+                        sku: "sku",
+                        price: 100,
+                        quantity: 1,
+                      ),
+                    ],
+                    customer: const WunderkindCustomer(
+                      email: "test@test.com",
+                      phone: "phone",
+                    ),
+                  );
+                  Wunderkind.trackPurchase(order);
+                },
+                child: const Text("Track Purchase"),
+              ),
+              ElevatedButton(
+                onPressed: () {
                   Wunderkind.trackTextOptIn(phone: 'phone');
                 },
                 child: const Text("Track Opt Int"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Wunderkind.setLogLevel(LogLevel.info);
+                },
+                child: const Text("Track Log level"),
               ),
             ],
           ),

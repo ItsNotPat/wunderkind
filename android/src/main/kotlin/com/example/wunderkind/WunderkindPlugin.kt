@@ -13,8 +13,12 @@ import io.flutter.plugin.common.MethodChannel.Result
 
 import co.wunderkind.sdk.Wunderkind
 import co.wunderkind.sdk.ProductCategory
+import co.wunderkind.sdk.Order
+import co.wunderkind.sdk.Invoice
+import co.wunderkind.sdk.Customer
+import co.wunderkind.sdk.Product
 import co.wunderkind.sdk.ScreenType
-//import co.wunderkind.sdk.LogLevel
+import co.wunderkind.sdk.other.log.LogLevel
 import co.wunderkind.sdk.Currency
 
 /** WunderkindPlugin */
@@ -102,14 +106,54 @@ class WunderkindPlugin: FlutterPlugin, MethodCallHandler {
       }
       "trackPurchase" -> handleCall(result) {
         val orderId = call.argument<String>("orderId")!!
-        val items = call.argument<List<Map<String, String>>>("items")!!
-        // ... rest of trackPurchase logic
+        val productsMap = call.argument<List<Map<String, Any>>>("products")!!
+        val invoiceMap = call.argument<Map<String, Any>>("invoice")!!
+        val paymentMethod = call.argument<String>("paymentMethod")!!
+        val customerMap = call.argument<Map<String, Any>>("customer")!!
+        val coupons = call.argument<List<String>>("coupons")
+        val goal = call.argument<String>("goal")!!
+
+        val currency = invoiceMap["currency"] as String
+
+        val invoice : Invoice = Invoice(
+            invoiceMap["amount"] as Double,
+            invoiceMap["tax"] as Double,
+            invoiceMap["shipping"] as Double,
+            invoiceMap["totalDiscount"] as Double?,
+            Currency.valueOf(currency.uppercase()),
+        );
+        val customer : Customer = Customer(
+            customerMap["phone"] as String,
+            customerMap["email"] as String,
+        );
+
+          val products = productsMap.map { map : Map<String, Any> ->
+              Product(
+                  map["productId"] as String,
+                  map["sku"] as String,
+                  map["price"] as Double,
+                  (map["quantity"] as Int).toLong(),
+              )
+          }
+
+
+        val order : Order = Order(
+            orderId,
+            invoice,
+            paymentMethod,
+            products,
+            customer,
+            coupons,
+            goal,
+        );
+
+        Wunderkind.getInstance().trackPurchase(order)
       }
       "setLogLevel" -> handleCall(result) {
         val levelStr = call.argument<String>("level")!!
-//        val level: LogLevel = LogLevel.valueOf(levelStr.uppercase())
-//
-//        Wunderkind.getInstance().setLogLevel(level)
+        val level: LogLevel = LogLevel.valueOf(levelStr.uppercase())
+
+        Wunderkind.getInstance().setLogLevel(level)
       }
 
       else -> result.notImplemented()

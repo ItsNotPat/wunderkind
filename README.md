@@ -76,9 +76,9 @@ Wunderkind.trackViewCategory(category: category);
 - This event is triggered when a user views a search results screen.
 ```dart
 const WunderkindCategory category = WunderkindCategory(
-  categoryName: "category_name",
-  url: "url",
-  itemIds: ["item_id1", "item_id2", "item_id3"],
+    categoryName: "category_name",
+    url: "url",
+    itemIds: ["item_id1", "item_id2", "item_id3"],
 );
 
 Wunderkind.trackViewSearch(searchCategory: category);
@@ -89,6 +89,12 @@ Wunderkind.trackViewSearch(searchCategory: category);
 ```dart
 const WunderkindCustomer customer = WunderkindCustomer(phone: 'phone', email: 'email');
 Wunderkind.trackLoggedIn(customer);
+```
+
+**Logged out event**
+- This event is called when a user logs out of the application.
+```dart
+Wunderkind.trackLoggedOut();
 ```
 
 **Text Opt In Event**

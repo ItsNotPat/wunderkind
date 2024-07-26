@@ -11,7 +11,7 @@ class WunderkindInvoice {
     required this.amount,
     required this.tax,
     required this.shipping,
-    required this.totalDiscount,
+    this.totalDiscount,
     required this.currency,
   });
 
@@ -23,7 +23,7 @@ class WunderkindInvoice {
       totalDiscount: map['totalDiscount'],
       currency:
           CurrencyExtentions.fromCurrencyString(map['currency'].toString()) ??
-              Currency.GBP,
+              Currency.gbp,
     );
   }
 

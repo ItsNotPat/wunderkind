@@ -114,6 +114,7 @@ class MethodChannelWunderkind extends WunderkindPlatform {
 
   @override
   Future<void> setLogLevel(LogLevel level) async {
-    await methodChannel.invokeMethod<void>('setLogLevel', {'level': level});
+    await methodChannel
+        .invokeMethod<void>('setLogLevel', {'level': level.toLogLevelString()});
   }
 }
