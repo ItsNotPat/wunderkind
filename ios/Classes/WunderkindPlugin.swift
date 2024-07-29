@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import WunderkindKit
 
 public class WunderkindPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -12,6 +13,11 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
     switch call.method {
     case "getPlatformVersion":
       result("iOS " + UIDevice.current.systemVersion)
+    case "initialize":
+      guard let args = call.arguments as? [String : Any] else {return}
+      let websiteId = args["webId"] as? String
+      let isDebugMode = args["isDebugMode"] as? Bool
+      Wunderkind.shared.initialize(websiteId: Int64(websiteId!)!, isDebugMode:isDebugMode ?? true)
     default:
       result(FlutterMethodNotImplemented)
     }

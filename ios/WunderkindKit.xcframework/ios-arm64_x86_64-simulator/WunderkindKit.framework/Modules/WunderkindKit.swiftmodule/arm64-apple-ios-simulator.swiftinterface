@@ -1,0 +1,490 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+// swift-module-flags: -target arm64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name WunderkindKit
+import CommonCrypto
+import CoreData
+import Foundation
+import Swift
+import SystemConfiguration
+import UIKit
+import UserNotifications
+@_exported import WunderkindKit
+import _Concurrency
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class RentalDetails : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let ancillaryItems: Swift.Bool
+  final public let stepNumber: Swift.Int?
+  final public let travelersCount: Swift.Int?
+  @objc final public let title: Swift.String?
+  @objc final public let url: Foundation.URL
+  public init(ancillaryItems: Swift.Bool, stepNumber: Swift.Int?, travelersCount: Swift.Int?, title: Swift.String?, url: Foundation.URL)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.RentalDetails {
+  @objc convenience dynamic public init?(ancillaryItems: Foundation.NSNumber?, stepNumber: Swift.Int, travelersCount: Swift.Int, title: Swift.String, url: Foundation.URL?)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class Customer : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let email: Swift.String
+  @objc final public let phone: Swift.String?
+  @objc final public let isHashed: Swift.Bool
+  @objc public init(email: Swift.String, phone: Swift.String, isHashed: Swift.Bool)
+  @objc public init(email: Swift.String, phone: Swift.String)
+  @objc public init(email: Swift.String, isHashed: Swift.Bool)
+  @objc public init(email: Swift.String)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@objc public enum Currency : Swift.Int, Swift.CaseIterable, Swift.Codable {
+  case USD
+  case KRW
+  case AED
+  case LTL
+  case ARS
+  case MAD
+  case AUD
+  case MXN
+  case BGN
+  case MYR
+  case BOB
+  case NOK
+  case BRL
+  case NZD
+  case CAD
+  case PEN
+  case CHF
+  case PHP
+  case CLP
+  case PKR
+  case CNY
+  case PLN
+  case COP
+  case RON
+  case CZK
+  case RSD
+  case DKK
+  case RUB
+  case EGP
+  case SAR
+  case EUR
+  case SEK
+  case GBP
+  case SGD
+  case HKD
+  case THB
+  case HRK
+  case TRY
+  case HUF
+  case TWD
+  case IDR
+  case UAH
+  case ILS
+  case VEF
+  case INR
+  case VND
+  case JPY
+  case ZAR
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [WunderkindKit.Currency]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [WunderkindKit.Currency] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class Order : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let orderId: Swift.String
+  @objc final public let invoice: WunderkindKit.Invoice
+  @objc final public let paymentMethod: Swift.String?
+  @objc final public let products: [WunderkindKit.Product]
+  @objc final public let customer: WunderkindKit.Customer
+  @objc final public let coupons: [Swift.String]?
+  @objc final public let goal: Swift.String
+  @nonobjc public init(orderId: Swift.String, invoice: WunderkindKit.Invoice, paymentMethod: Swift.String?, products: [WunderkindKit.Product], customer: WunderkindKit.Customer, coupons: [Swift.String]?, goal: Swift.String)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.Order {
+  @objc convenience dynamic public init?(orderId: Swift.String, invoice: WunderkindKit.Invoice?, paymentMethod: Swift.String?, products: [WunderkindKit.Product]?, customer: WunderkindKit.Customer?, coupons: [Swift.String]?, goal: Swift.String)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class Wunderkind : ObjectiveC.NSObject {
+  @objc public static let shared: WunderkindKit.Wunderkind
+  @objc public static let sdkVersion: Swift.String
+  @objc final public var logLevel: WunderkindKit.LogLevel {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+extension WunderkindKit.Wunderkind {
+  @objc final public func initialize(websiteId: Swift.Int64, isDebugMode: Swift.Bool)
+  @objc final public func initialize(websiteId: Swift.Int64, isDebugMode: Swift.Bool, isMultipleWebsiteIdMode: Swift.Bool)
+  @objc final public var isContextInfoTrackingEnabled: Swift.Bool {
+    @objc get
+    @objc set
+  }
+}
+extension WunderkindKit.Wunderkind {
+  @nonobjc final public func trackScreenView(url: Foundation.URL, type: WunderkindKit.ScreenType)
+  @objc final public func trackViewItem(itemId: Swift.String, groupId: Swift.String)
+  @objc final public func trackAppPushTokenSet(deviceToken: Foundation.Data)
+  @objc final public func trackAppPushOptIn()
+  @objc final public func trackAppPushOptOut()
+  @objc final public func trackAppPushOpened(appPush: UserNotifications.UNNotification)
+  @objc final public func trackAppPushDelivered(appPush: UserNotifications.UNNotification)
+  @objc @available(*, deprecated, renamed: "trackLoggedIn(email:phone:)")
+  final public func trackExistingLoggedIn(email: Swift.String, phone: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackLoggedIn(email:)")
+  final public func trackExistingLoggedIn(email: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackAffiliateLoggedIn(email:phone:accountType:affiliateNumber:)")
+  final public func trackExistingAffiliateLoggedIn(email: Swift.String, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackHashedLoggedIn(email:phone:)")
+  final public func trackHashedExistingLoggedIn(email: Swift.String, phone: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackHashedLoggedIn(email:)")
+  final public func trackHashedExistingLoggedIn(email: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackHashedAffiliateLoggedIn(email:phone:accountType:affiliateNumber:)")
+  final public func trackHashedExistingAffiliateLoggedIn(email: Swift.String, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
+  @objc final public func trackAddToCart(itemId: Swift.String)
+  @objc final public func trackEmptyCart()
+  @nonobjc final public func trackViewCategory(category: WunderkindKit.ProductCategory)
+  @objc @available(*, deprecated, renamed: "trackLoggedIn(email:phone:)")
+  final public func trackLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod, phone: Swift.String)
+  @objc final public func trackLoggedIn(email: Swift.String, phone: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackLoggedIn(email:)")
+  final public func trackLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod)
+  @objc final public func trackLoggedIn(email: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackAffiliateLoggedIn(email:phone:accountType:affiliateNumber:)")
+  final public func trackAffiliateLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
+  @objc final public func trackAffiliateLoggedIn(email: Swift.String, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackHashedLoggedIn(email:phone:)")
+  final public func trackHashedLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod, phone: Swift.String)
+  @objc final public func trackHashedLoggedIn(email: Swift.String, phone: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackHashedLoggedIn(email:)")
+  final public func trackHashedLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod)
+  @objc final public func trackHashedLoggedIn(email: Swift.String)
+  @objc @available(*, deprecated, renamed: "trackHashedAffiliateLoggedIn(email:phone:accountType:affiliateNumber:)")
+  final public func trackHashedAffiliateLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
+  @objc final public func trackHashedAffiliateLoggedIn(email: Swift.String, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
+  @objc final public func trackLoggedOut()
+  @objc final public func trackEndVisit()
+  @objc final public func getDeviceID() -> Swift.String
+  @objc final public func trackCustom(eventName: Swift.String, extraData: [Swift.String : Swift.String])
+  @objc final public func trackSelectSKU(groupId: Swift.String, feedId: Swift.String)
+  @nonobjc final public func trackViewSearch(category: WunderkindKit.ProductCategory)
+  @nonobjc final public func trackCarRentalProgress(progress: WunderkindKit.CarRentalProgress)
+  @nonobjc final public func trackHotelRentalProgress(progress: WunderkindKit.HotelRentalProgress)
+  @nonobjc final public func trackCarRentalAddToCart(rental: WunderkindKit.CarRentalAddToCart)
+  @nonobjc final public func trackHotelRentalAddToCart(rental: WunderkindKit.HotelRentalAddToCart)
+  @nonobjc final public func trackPurchase(order: WunderkindKit.Order)
+  @nonobjc final public func trackRentalPurchase(order: WunderkindKit.RentalOrder)
+  @objc final public func trackMultiplePurchases(orders: [WunderkindKit.CustomOrder])
+  @objc final public func trackTextOptIn(phoneNumber: Swift.String, languageCode: Swift.String?)
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.Wunderkind {
+  @objc final public func trackScreenView(url: Foundation.URL?, type: WunderkindKit.ScreenType)
+  @objc final public func trackViewCategory(category: WunderkindKit.ProductCategory?)
+  @objc final public func trackViewSearch(category: WunderkindKit.ProductCategory?)
+  @objc final public func trackCarRentalProgress(progress: WunderkindKit.CarRentalProgress?)
+  @objc final public func trackCarRentalAddToCart(rental: WunderkindKit.CarRentalAddToCart?)
+  @objc final public func trackHotelRentalAddToCart(rental: WunderkindKit.HotelRentalAddToCart?)
+  @objc final public func trackHotelRentalProgress(progress: WunderkindKit.HotelRentalProgress?)
+  @objc final public func trackPurchase(order: WunderkindKit.Order?)
+  @objc final public func trackRentalPurchase(order: WunderkindKit.RentalOrder?)
+}
+@objc public enum LoginMethod : Swift.Int, Swift.CaseIterable, Swift.Codable {
+  case email
+  case twitter
+  case facebook
+  case google
+  case apple
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [WunderkindKit.LoginMethod]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [WunderkindKit.LoginMethod] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension WunderkindKit.LoginMethod {
+  public init?(rawStringValue: Swift.String)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class CarRentalProgress : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let options: [Swift.String]
+  @objc final public let isRentalOneWay: Swift.Bool
+  @objc final public let details: WunderkindKit.RentalDetails
+  @objc final public let request: WunderkindKit.CarRentalRequest
+  @objc final public let account: WunderkindKit.RentalAccount
+  @objc public init(options: [Swift.String], isRentalOneWay: Swift.Bool, details: WunderkindKit.RentalDetails, request: WunderkindKit.CarRentalRequest, account: WunderkindKit.RentalAccount)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.CarRentalProgress {
+  @objc convenience dynamic public init(options: [Swift.String], isRentalOneWay: Foundation.NSNumber?, rentalDetails: WunderkindKit.RentalDetails?, request: WunderkindKit.CarRentalRequest?, account: WunderkindKit.RentalAccount?)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class RentalLocation : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let title: Swift.String
+  @objc final public let code: Swift.String
+  @objc public init(title: Swift.String, code: Swift.String)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class CustomOrder : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let websiteId: Swift.Int64
+  @objc final public let order: WunderkindKit.Order
+  @nonobjc public init(websiteId: Swift.Int64, order: WunderkindKit.Order)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.CustomOrder {
+  @objc convenience dynamic public init?(websiteId: Swift.Int64, order: WunderkindKit.Order?)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class CarRentalRequest : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let carCode: Swift.String?
+  @objc final public let startLocation: WunderkindKit.RentalLocation
+  @objc final public let dropOffLocation: WunderkindKit.RentalLocation?
+  @objc final public let startTimestamp: Foundation.TimeInterval
+  @objc final public let endTimestamp: Foundation.TimeInterval
+  @objc public init(carCode: Swift.String?, startLocation: WunderkindKit.RentalLocation, dropOffLocation: WunderkindKit.RentalLocation?, startTimestamp: Foundation.TimeInterval, endTimestamp: Foundation.TimeInterval)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.CarRentalRequest {
+  @objc convenience dynamic public init?(carCode: Swift.String?, startRentalLocation: WunderkindKit.RentalLocation?, dropOffLocation: WunderkindKit.RentalLocation?, startTimestamp: Foundation.TimeInterval, endTimestamp: Foundation.TimeInterval)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class RentalOrder : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let accountType: WunderkindKit.AccountType
+  @objc final public let affiliateNumber: Swift.String?
+  @objc final public let order: WunderkindKit.Order
+  @nonobjc public init(accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String?, order: WunderkindKit.Order)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.RentalOrder {
+  @objc convenience dynamic public init?(accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String?, order: WunderkindKit.Order?)
+}
+@objc public enum AccountType : Swift.Int, Swift.CaseIterable, Swift.Codable {
+  case business
+  case leisure
+  public init(from decoder: Swift.Decoder) throws
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [WunderkindKit.AccountType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [WunderkindKit.AccountType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension WunderkindKit.AccountType {
+  public init?(rawStringValue: Swift.String)
+}
+@objc public enum ScreenType : Swift.Int, Swift.CaseIterable, Swift.Codable {
+  case home
+  case product
+  case category
+  case search
+  case cart
+  case article
+  case gallery
+  case checkout
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [WunderkindKit.ScreenType]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [WunderkindKit.ScreenType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension WunderkindKit.ScreenType {
+  public init?(rawStringValue: Swift.String)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class RentalAccount : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let accountType: WunderkindKit.AccountType
+  @objc final public let affiliateNumber: Swift.String?
+  @objc final public let countryOfResidence: Swift.String?
+  @objc final public let age: Foundation.Decimal
+  @objc public init(accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String?, countryOfResidence: Swift.String?, age: Foundation.Decimal)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.RentalAccount {
+  @objc convenience dynamic public init(accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String?, countryOfResidence: Swift.String?, userAge: Foundation.NSDecimalNumber?)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class ProductCategory : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let title: Swift.String
+  @objc final public let url: Foundation.URL
+  @objc final public let itemIds: [Swift.String]
+  @nonobjc public init(title: Swift.String, url: Foundation.URL, itemIds: [Swift.String])
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.ProductCategory {
+  @objc convenience dynamic public init(title: Swift.String, url: Foundation.URL?, itemIds: [Swift.String]?)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class HotelRentalRequest : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let rentalLocation: WunderkindKit.RentalLocation
+  @objc final public let startTimestamp: Foundation.TimeInterval
+  @objc final public let endTimestamp: Foundation.TimeInterval
+  @objc public init(rentalLocation: WunderkindKit.RentalLocation, startTimestamp: Foundation.TimeInterval, endTimestamp: Foundation.TimeInterval)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.HotelRentalRequest {
+  @objc convenience dynamic public init?(startRentalLocation: WunderkindKit.RentalLocation?, startTimestamp: Foundation.TimeInterval, endTimestamp: Foundation.TimeInterval)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class HotelRentalAddToCart : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let selectedOption: Swift.String
+  final public let roomsCount: Swift.Int?
+  @objc final public let details: WunderkindKit.RentalDetails
+  @objc final public let request: WunderkindKit.HotelRentalRequest
+  @objc final public let account: WunderkindKit.RentalAccount
+  public init(selectedOption: Swift.String, roomsCount: Swift.Int?, details: WunderkindKit.RentalDetails, request: WunderkindKit.HotelRentalRequest, account: WunderkindKit.RentalAccount)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.HotelRentalAddToCart {
+  @objc convenience dynamic public init(selectedOption: Swift.String, roomsCount: Swift.Int, rentalDetails: WunderkindKit.RentalDetails?, request: WunderkindKit.HotelRentalRequest?, account: WunderkindKit.RentalAccount?)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class HotelRentalProgress : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let options: [Swift.String]
+  final public let roomsCount: Swift.Int?
+  @objc final public let details: WunderkindKit.RentalDetails
+  @objc final public let request: WunderkindKit.HotelRentalRequest
+  @objc final public let account: WunderkindKit.RentalAccount
+  public init(options: [Swift.String], roomsCount: Swift.Int?, details: WunderkindKit.RentalDetails, request: WunderkindKit.HotelRentalRequest, account: WunderkindKit.RentalAccount)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.HotelRentalProgress {
+  @objc convenience dynamic public init(options: [Swift.String], roomsCount: Swift.Int, rentalDetails: WunderkindKit.RentalDetails?, request: WunderkindKit.HotelRentalRequest?, account: WunderkindKit.RentalAccount?)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class Invoice : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let amount: Foundation.Decimal
+  @objc final public let tax: Foundation.Decimal
+  @objc final public let shipping: Foundation.Decimal
+  final public let totalDiscount: Foundation.Decimal?
+  @objc final public let currency: WunderkindKit.Currency
+  @nonobjc public init(amount: Foundation.Decimal, tax: Foundation.Decimal, shipping: Foundation.Decimal, totalDiscount: Foundation.Decimal?, currency: WunderkindKit.Currency)
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case amount
+    case tax
+    case shipping
+    case totalDiscount
+    case currency
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.Invoice {
+  @objc convenience dynamic public init(amount: Foundation.NSDecimalNumber?, tax: Foundation.NSDecimalNumber?, totalDiscount: Foundation.NSDecimalNumber?, shipping: Foundation.NSDecimalNumber?, currency: WunderkindKit.Currency)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class Product : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let productId: Swift.String
+  @objc final public let skuId: Swift.String
+  @objc final public let price: Foundation.Decimal
+  @objc final public let quantity: Swift.Int64
+  @nonobjc public init(productId: Swift.String, skuId: Swift.String, price: Foundation.Decimal, quantity: Swift.Int64)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.Product {
+  @objc convenience dynamic public init(productId: Swift.String, skuId: Swift.String, quantity: Swift.Int64, price: Foundation.NSDecimalNumber?)
+}
+@objc public enum LogLevel : Swift.Int, Swift.CaseIterable, Swift.Codable {
+  case none
+  case debug
+  case info
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [WunderkindKit.LogLevel]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [WunderkindKit.LogLevel] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension WunderkindKit.LogLevel {
+  public init?(rawStringValue: Swift.String)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class CarRentalAddToCart : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let selectedOption: Swift.String
+  @objc final public let isRentalOneWay: Swift.Bool
+  @objc final public let details: WunderkindKit.RentalDetails
+  @objc final public let request: WunderkindKit.CarRentalRequest
+  @objc final public let account: WunderkindKit.RentalAccount
+  @objc public init(selectedOption: Swift.String, isRentalOneWay: Swift.Bool, details: WunderkindKit.RentalDetails, request: WunderkindKit.CarRentalRequest, account: WunderkindKit.RentalAccount)
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@available(*, unavailable)
+@objc extension WunderkindKit.CarRentalAddToCart {
+  @objc convenience dynamic public init(selectedOption: Swift.String, isRentalOneWay: Foundation.NSNumber?, rentalDetails: WunderkindKit.RentalDetails?, request: WunderkindKit.CarRentalRequest?, account: WunderkindKit.RentalAccount?)
+}
+extension WunderkindKit.Currency : Swift.Equatable {}
+extension WunderkindKit.Currency : Swift.Hashable {}
+extension WunderkindKit.Currency : Swift.RawRepresentable {}
+extension WunderkindKit.LoginMethod : Swift.Equatable {}
+extension WunderkindKit.LoginMethod : Swift.Hashable {}
+extension WunderkindKit.LoginMethod : Swift.RawRepresentable {}
+extension WunderkindKit.AccountType : Swift.Equatable {}
+extension WunderkindKit.AccountType : Swift.Hashable {}
+extension WunderkindKit.AccountType : Swift.RawRepresentable {}
+extension WunderkindKit.ScreenType : Swift.Equatable {}
+extension WunderkindKit.ScreenType : Swift.Hashable {}
+extension WunderkindKit.ScreenType : Swift.RawRepresentable {}
+extension WunderkindKit.Invoice.CodingKeys : Swift.Equatable {}
+extension WunderkindKit.Invoice.CodingKeys : Swift.Hashable {}
+extension WunderkindKit.Invoice.CodingKeys : Swift.RawRepresentable {}
+extension WunderkindKit.LogLevel : Swift.Equatable {}
+extension WunderkindKit.LogLevel : Swift.Hashable {}
+extension WunderkindKit.LogLevel : Swift.RawRepresentable {}

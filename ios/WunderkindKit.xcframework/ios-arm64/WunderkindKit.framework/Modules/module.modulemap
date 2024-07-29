@@ -1,0 +1,11 @@
+framework module WunderkindKit {
+  umbrella header "WunderkindKit.h"
+
+  export *
+  module * { export * }
+}
+
+module WunderkindKit.Swift {
+    header "WunderkindKit-Swift.h"
+    requires objc
+}
