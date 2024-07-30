@@ -11,13 +11,13 @@ enum ScreenType {
 
 extension ScreenTypeExtension on ScreenType {
   String toScreenTypeString() {
-    return name.toUpperCase();
+    return name;
   }
 
   static ScreenType? fromCurrencyString(String currencyString) {
     try {
       return ScreenType.values.firstWhere((currency) =>
-          currency.name.toUpperCase() == currencyString.toUpperCase());
+          currency.name.toLowerCase() == currencyString.toLowerCase());
     } catch (e) {
       return null;
     }

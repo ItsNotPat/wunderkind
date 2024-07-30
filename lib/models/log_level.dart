@@ -6,13 +6,13 @@ enum LogLevel {
 
 extension LogLevelExtension on LogLevel {
   String toLogLevelString() {
-    return name.toUpperCase();
+    return name;
   }
 
   static LogLevel? fromCurrencyString(String currencyString) {
     try {
       return LogLevel.values.firstWhere((currency) =>
-          currency.name.toUpperCase() == currencyString.toUpperCase());
+          currency.name.toLowerCase() == currencyString.toLowerCase());
     } catch (e) {
       return null;
     }

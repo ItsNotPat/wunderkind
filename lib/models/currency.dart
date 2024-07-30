@@ -60,7 +60,7 @@ extension CurrencyExtentions on Currency {
   static Currency? fromCurrencyString(String currencyString) {
     try {
       return Currency.values.firstWhere((currency) =>
-          currency.name.toUpperCase() == currencyString.toUpperCase());
+          currency.name.toLowerCase() == currencyString.toLowerCase());
     } catch (e) {
       return null;
     }
