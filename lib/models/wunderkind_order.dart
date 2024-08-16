@@ -5,7 +5,7 @@ import 'package:wunderkind/models/wunderkind_product.dart';
 class WunderkindOrder {
   final String orderId;
   final WunderkindInvoice invoice;
-  final String? paymentMethod;
+  final String paymentMethod;
   final List<WunderkindProduct> products;
   final WunderkindCustomer customer;
   final List<String>? coupons;
@@ -14,7 +14,7 @@ class WunderkindOrder {
   const WunderkindOrder({
     required this.orderId,
     required this.invoice,
-    this.paymentMethod,
+    required this.paymentMethod,
     required this.products,
     required this.customer,
     this.coupons,
@@ -41,7 +41,7 @@ class WunderkindOrder {
     return {
       'orderId': orderId,
       'invoice': invoice.toMap(),
-      'paymentMethod': paymentMethod ?? "purchase",
+      'paymentMethod': paymentMethod,
       'products': List<Map<String, dynamic>>.from(
           products.map((product) => product.toMap()).toList()),
       'customer': customer.toMap(),

@@ -122,6 +122,7 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () {
                   WunderkindOrder order = WunderkindOrder(
                     orderId: "order001",
+                    paymentMethod: 'COD',
                     invoice: WunderkindInvoice(
                       amount: 300,
                       tax: 12.0,
