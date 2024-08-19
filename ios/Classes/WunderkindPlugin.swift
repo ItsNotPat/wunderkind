@@ -17,11 +17,13 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let isDebugMode = args["isDebugMode"] as? Bool
 
       Wunderkind.shared.initialize(websiteId: Int64(websiteId!)!, isDebugMode:isDebugMode ?? true)
+      result(nil)
     case "setIsContextInfoTrackingEnabled":
       guard let args = call.arguments as? [String : Any] else {return}
       let enabled = args["enabled"] as? Bool
 
       Wunderkind.shared.isContextInfoTrackingEnabled = enabled ?? true
+      result(nil)
     case "trackScreenView":
       guard let args = call.arguments as? [String : Any] else {return}
       let urlStr = args["url"] as? String
@@ -30,25 +32,30 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let screenType = WunderkindKit.ScreenType(rawStringValue: screenStr ?? "")
 
       Wunderkind.shared.trackScreenView(url: URL(string: urlStr ?? "")!, type: screenType ?? .home)
+      result(nil)
     case "trackEmptyCart":
       Wunderkind.shared.trackEmptyCart()
+      result(nil)
     case "trackViewItem":
       guard let args = call.arguments as? [String : Any] else {return}
       let itemId = args["itemId"] as? String
       let groupId = args["groupId"] as? String
 
       Wunderkind.shared.trackViewItem(itemId: itemId ?? "", groupId: groupId ?? "") 
+      result(nil)
     case "trackSelectSku":
       guard let args = call.arguments as? [String : Any] else {return}
       let groupId = args["groupId"] as? String
       let feedId = args["feedId"] as? String
 
       Wunderkind.shared.trackSelectSKU(groupId: groupId ?? "", feedId: feedId ?? "")
+      result(nil)
     case "trackAddToCart":
       guard let args = call.arguments as? [String : Any] else {return}
       let itemId = args["itemId"] as? String
 
       Wunderkind.shared.trackAddToCart(itemId: itemId ?? "") 
+      result(nil)
     case "trackViewCategory":
       guard let args = call.arguments as? [String : Any] else {return}
       let categoryName = args["categoryName"] as? String
@@ -58,6 +65,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       var category = WunderkindKit.ProductCategory(title: categoryName ?? "", url: URL(string: urlStr ?? "")!, itemIds: ["test_id"])
       
       Wunderkind.shared.trackViewCategory(category: category)
+      result(nil)
     case "trackViewSearch":
       guard let args = call.arguments as? [String : Any] else {return}
       let categoryName = args["categoryName"] as? String
@@ -67,12 +75,14 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       var category = WunderkindKit.ProductCategory(title: categoryName ?? "", url: URL(string: urlStr ?? "")!, itemIds: ["test_id"])
       
       Wunderkind.shared.trackViewSearch(category: category) 
+      result(nil)
     case "trackLoggedIn":
       guard let args = call.arguments as? [String : Any] else {return}
       let phone = args["phone"] as? String
       let email = args["email"] as? String
 
       Wunderkind.shared.trackLoggedIn(email: email ?? "", phone: phone ?? "") 
+      result(nil)
     case "trackLoggedOut":
 
       Wunderkind.shared.trackLoggedOut()
@@ -81,6 +91,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let phone = args["phone"] as? String
 
       Wunderkind.shared.trackTextOptIn(phoneNumber: phone ?? "", languageCode: nil) 
+      result(nil)
     case "trackPurchase":
       guard let args = call.arguments as? [String : Any] else {return}
       let orderId = args["orderId"] as? String
@@ -126,6 +137,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       );
 
       Wunderkind.shared.trackPurchase(order: order)
+      result(nil)
     case "setLogLevel":
       guard let args = call.arguments as? [String : Any] else {return}
       let level = args["level"] as? String
@@ -133,6 +145,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let screenType = WunderkindKit.LogLevel(rawStringValue: level ?? "")
       
       Wunderkind.shared.logLevel = .debug 
+      result(nil)
     default:
       result(FlutterMethodNotImplemented)
     }
