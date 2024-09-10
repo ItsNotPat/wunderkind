@@ -39,7 +39,7 @@ class MethodChannelWunderkind extends WunderkindPlatform {
     required String url,
     required ScreenType screen,
   }) async {
-    debugPrint('[WDK Plugin] WebId: url: $url, screen: ${screen.toString()}');
+    debugPrint('[WDK Plugin] url: $url, screen: ${screen.toString()}');
     await methodChannel.invokeMethod<void>('trackScreenView', {
       "url": url,
       "screen": screen.toScreenTypeString(),
