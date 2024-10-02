@@ -81,7 +81,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let phone = args["phone"] as? String
       let email = args["email"] as? String
 
-      Wunderkind.shared.trackLoggedIn(email: email ?? "", phone: phone ?? "") 
+      Wunderkind.shared.trackLoggedIn(email: email ?? "", phone: Int(phone.dropFirst()) ?? 0) 
       result(nil)
     case "trackLoggedOut":
 
@@ -90,7 +90,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       guard let args = call.arguments as? [String : Any] else {return}
       let phone = args["phone"] as? String
 
-      Wunderkind.shared.trackTextOptIn(phoneNumber: phone ?? "", languageCode: nil) 
+      Wunderkind.shared.trackTextOptIn(phoneNumber: Int(phone.dropFirst()) ?? 0, languageCode: nil) 
       result(nil)
     case "trackPurchase":
       guard let args = call.arguments as? [String : Any] else {return}
@@ -103,13 +103,13 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let goal = args["goal"] as? String
       let currency = invoiceMap["currency"] as? String
 
-      let currencyType = WunderkindKit.Currency(rawValue: Int(currency ?? "0") ?? 0)
+      let currencyType = WunderkindKit.Currency(rawValue: Int(currency.uppercased() ?? "0") ?? 0)
       let invoice = WunderkindKit.Invoice(
           amount: invoiceMap["amount"] as? Decimal ?? 0.0,
           tax: invoiceMap["tax"] as? Decimal ?? 0.0,
           shipping: invoiceMap["shipping"] as? Decimal ?? 0.0,
-          totalDiscount: invoiceMap["totalDiscount"] as? Decimal ?? 0.0,
-          currency: currencyType ?? .USD
+          totalDiscount: invoiceMap["totalDiscount"] as? Decimal,
+          currency: currencyType ?? .GBP
       )
       let customer = WunderkindKit.Customer(
           email: customerMap["email"] as? String ?? "",

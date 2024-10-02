@@ -95,7 +95,7 @@ class WunderkindPlugin: FlutterPlugin, MethodCallHandler {
       "trackLoggedIn" -> handleCall(result) {
         val phone = call.argument<String>("phone")!!
         val email = call.argument<String>("email")!!
-        Wunderkind.getInstance().trackLoggedIn(phone, email)
+        Wunderkind.getInstance().trackLoggedIn(email, phone)
       }
       "trackLoggedOut" -> handleCall(result) {
         Wunderkind.getInstance().trackLoggedOut()
@@ -123,8 +123,8 @@ class WunderkindPlugin: FlutterPlugin, MethodCallHandler {
             Currency.valueOf(currency.uppercase()),
         );
         val customer : Customer = Customer(
-            customerMap["phone"] as String,
             customerMap["email"] as String,
+            customerMap["phone"] as String,
         );
 
           val products = productsMap.map { map : Map<String, Any> ->
