@@ -81,7 +81,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let phone = args["phone"] as? String
       let email = args["email"] as? String
 
-      Wunderkind.shared.trackLoggedIn(email: email ?? "", phone: Int(phone.dropFirst()) ?? 0) 
+      Wunderkind.shared.trackLoggedIn(email: email ?? "", phone: phone ?? "") 
       result(nil)
     case "trackLoggedOut":
 
@@ -90,7 +90,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       guard let args = call.arguments as? [String : Any] else {return}
       let phone = args["phone"] as? String
 
-      Wunderkind.shared.trackTextOptIn(phoneNumber: Int(phone.dropFirst()) ?? 0, languageCode: nil) 
+      Wunderkind.shared.trackTextOptIn(phoneNumber: phone ?? "", languageCode: nil) 
       result(nil)
     case "trackPurchase":
       guard let args = call.arguments as? [String : Any] else {return}
@@ -103,12 +103,27 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let goal = args["goal"] as? String
       let currency = invoiceMap["currency"] as? String
 
-      let currencyType = WunderkindKit.Currency(rawValue: Int(currency.uppercased() ?? "0") ?? 0)
+      var currencyValue = 32 as Int
+
+      switch (currency) {
+        case ("USD"):
+            currencyValue = 0
+        case ("GBP"):
+            currencyValue = 32
+        case ("HKD"):
+            currencyValue = 34
+        case ("EUR"):
+            currencyValue = 30
+        default:
+            currencyValue = 32
+        }
+
+      let currencyType = WunderkindKit.Currency(rawValue: currencyValue)
       let invoice = WunderkindKit.Invoice(
-          amount: invoiceMap["amount"] as? Decimal ?? 0.0,
-          tax: invoiceMap["tax"] as? Decimal ?? 0.0,
-          shipping: invoiceMap["shipping"] as? Decimal ?? 0.0,
-          totalDiscount: invoiceMap["totalDiscount"] as? Decimal,
+          amount: invoiceMap["amount"] != nil ? Decimal(invoiceMap["amount"] as? Double ?? 0.0) : 0.0,
+          tax: invoiceMap["tax"] != nil ? Decimal(invoiceMap["tax"] as? Double ?? 0.0) : 0.0,
+          shipping: invoiceMap["shipping"] != nil ? Decimal(invoiceMap["shipping"] as? Double ?? 0.0) : 0.0,
+          totalDiscount: invoiceMap["totalDiscount"] != nil ? Decimal(invoiceMap["totalDiscount"] as? Double ?? 0.0) : 0.0,
           currency: currencyType ?? .GBP
       )
       let customer = WunderkindKit.Customer(
