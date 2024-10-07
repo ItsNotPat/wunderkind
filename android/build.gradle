@@ -75,5 +75,5 @@ android {
 }
 
 dependencies {
-    implementation "co.wunderkind.sdk:wunderkindsdk:1.3.4"
+    implementation "co.wunderkind.sdk:wunderkindsdk:1.4.0"
 }

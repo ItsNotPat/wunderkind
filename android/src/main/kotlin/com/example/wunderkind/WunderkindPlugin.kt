@@ -95,14 +95,31 @@ class WunderkindPlugin: FlutterPlugin, MethodCallHandler {
       "trackLoggedIn" -> handleCall(result) {
         val phone = call.argument<String>("phone")!!
         val email = call.argument<String>("email")!!
-        Wunderkind.getInstance().trackLoggedIn(email, phone)
+
+        var phoneStr = phone;
+
+        if(phoneStr.startsWith("+")) {
+          phoneStr = phone.drop(1)
+        }
+
+        val phoneLong = phoneStr.toLong()
+        Wunderkind.getInstance().trackLoggedIn(email, phoneLong)
       }
       "trackLoggedOut" -> handleCall(result) {
         Wunderkind.getInstance().trackLoggedOut()
       }
       "trackTextOptIn" -> handleCall(result) {
         val phone = call.argument<String>("phone")!!
-        Wunderkind.getInstance().trackTextOptIn(phone)
+
+        
+        var phoneStr = phone;
+
+        if(phoneStr.startsWith("+")){
+          phoneStr = phone.drop(1)
+        }
+
+        val phoneLong = phoneStr.toLong()
+        Wunderkind.getInstance().trackTextOptIn(phoneLong)
       }
       "trackPurchase" -> handleCall(result) {
         val orderId = call.argument<String>("orderId")!!
@@ -122,9 +139,19 @@ class WunderkindPlugin: FlutterPlugin, MethodCallHandler {
             invoiceMap["totalDiscount"] as Double?,
             Currency.valueOf(currency.uppercase()),
         );
+
+        var phoneStr = customerMap["phone"] as String;
+
+        if(phoneStr.startsWith("+")) {
+          phoneStr = phone.drop(1)
+        }
+
+        val phoneLong = phoneStr.toLong()
+
+
         val customer : Customer = Customer(
             customerMap["email"] as String,
-            customerMap["phone"] as String,
+            phoneLong,
         );
 
           val products = productsMap.map { map : Map<String, Any> ->
