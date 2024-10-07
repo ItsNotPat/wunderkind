@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/WunderkindKit-Swift.h</key>
 		<data>
-		pEdtm9+3ePvQX3qoaxqFjlI/5ts=
+		YK/AmlvfixaYwI/f9ahbXITROsY=
 		</data>
 		<key>Headers/WunderkindKit.h</key>
 		<data>
@@ -14,31 +14,31 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		z29ii5MkzSJJTt9uu3upVQHLrOk=
+		oATn+nCs7dXC5HzGaivmCMvHQUQ=
 		</data>
 		<key>Modules/WunderkindKit.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		ZP2ofKTDiKAnsrUI+wlf1bNSHNE=
+		2qAT+k3rujFa9geWnqHK0xeJ4wg=
 		</data>
 		<key>Modules/WunderkindKit.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		kbymFnKmY7qUvylHd5OmHz0fHsQ=
+		3rXOGeyCEUPXzSmg/GatK0Uba6c=
 		</data>
 		<key>Modules/WunderkindKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		5XO8oqPBZa0uxbYeTiI8PNHIqGs=
+		8C6PGLp7EAavE4fVYLz+UN8F5zo=
 		</data>
 		<key>Modules/WunderkindKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		WO38cTMBl9DyBknaFWjPVyq3950=
+		nEu2S+IxAHD3BogeJ+XaGy/3m94=
 		</data>
 		<key>Modules/WunderkindKit.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		7LmN5MJyvbRuZt9OnBJzPaXus/Y=
+		ipi2U1KM9xDmJwK4VgRqxSn2Koc=
 		</data>
 		<key>Modules/WunderkindKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		akJ2toRPkvI1QOD8dpwdZ9y9Tso=
+		DkzBceGcEhiItY4fej7yFU1Jd40=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -63,7 +63,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4c871H0keuuSGHkVMjKMaYkxF5H4WzllqLtNct0ZBX8=
+			RsR6QLsp6sylFOnI/xjc7COpto2wnS2TW7XWiXeGCys=
 			</data>
 		</dict>
 		<key>Headers/WunderkindKit.h</key>
@@ -77,42 +77,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WqMV6GmrA2XfEXBTPa6SqaBjAMo48Rizeq9XWn4Drm8=
+			p8Aeo2caAXmn5Aw1ngqJP09oBUfGAUUyxfzbEoLixB4=
 			</data>
 		</dict>
 		<key>Modules/WunderkindKit.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YODMUg/5sErUip0tQyn3jp/90lI5FBAFr74bNNc61bI=
+			1OGJqjXNeNitXdlUBT/lHVHLOv7KGxWIetFfTQBI3bE=
 			</data>
 		</dict>
 		<key>Modules/WunderkindKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			k9SYHMhqK2OKNwlcriknjCke+nlLQ18YDY1oJ64LHPI=
+			KXX4XLG8T321PYuwnSVuiJHb+4FlSTg8rIu/Sm9ywS0=
 			</data>
 		</dict>
 		<key>Modules/WunderkindKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6UAFq+Og++ZwBRhiOnOqRBCYOa9BfTUg5Cf2I3nPt38=
+			a9WfoHCrYqpxa9Hl8PbI0evSvaPXZrYPA/kBKq40LlE=
 			</data>
 		</dict>
 		<key>Modules/WunderkindKit.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			B8dZ6MzlUWhuRYGENQmOI0ePvBCJvEeVhtS0mvQulvY=
+			/Yyf8+ULjox6J0AGVlxEXIy0EIq5l/tv9pA2dNwGgbA=
 			</data>
 		</dict>
 		<key>Modules/WunderkindKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GbchiBAvSFfrxMS6xWEKhv4YyldqCFEcNMLfnW5mtq0=
+			RXqonH9bumbfSQwMYBhuXiuBf+oyNIq0HpsdIcBokOs=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

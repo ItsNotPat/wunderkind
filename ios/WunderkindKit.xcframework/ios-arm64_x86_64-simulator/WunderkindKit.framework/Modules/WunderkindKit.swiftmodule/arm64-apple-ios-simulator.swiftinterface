@@ -29,8 +29,9 @@ import _Concurrency
   @objc final public let email: Swift.String
   @objc final public let phone: Swift.String?
   @objc final public let isHashed: Swift.Bool
-  @objc public init(email: Swift.String, phone: Swift.String, isHashed: Swift.Bool)
-  @objc public init(email: Swift.String, phone: Swift.String)
+  @objc public init(hashedEmail: Swift.String, hashedPhone: Swift.String)
+  @objc public init(hashedEmail: Swift.String)
+  @objc public init(email: Swift.String, phone: Swift.Int)
   @objc public init(email: Swift.String, isHashed: Swift.Bool)
   @objc public init(email: Swift.String)
   @objc deinit
@@ -138,41 +139,23 @@ extension WunderkindKit.Wunderkind {
   @objc final public func trackAppPushOptOut()
   @objc final public func trackAppPushOpened(appPush: UserNotifications.UNNotification)
   @objc final public func trackAppPushDelivered(appPush: UserNotifications.UNNotification)
-  @objc @available(*, deprecated, renamed: "trackLoggedIn(email:phone:)")
-  final public func trackExistingLoggedIn(email: Swift.String, phone: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackLoggedIn(email:)")
-  final public func trackExistingLoggedIn(email: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackAffiliateLoggedIn(email:phone:accountType:affiliateNumber:)")
-  final public func trackExistingAffiliateLoggedIn(email: Swift.String, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackHashedLoggedIn(email:phone:)")
-  final public func trackHashedExistingLoggedIn(email: Swift.String, phone: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackHashedLoggedIn(email:)")
-  final public func trackHashedExistingLoggedIn(email: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackHashedAffiliateLoggedIn(email:phone:accountType:affiliateNumber:)")
-  final public func trackHashedExistingAffiliateLoggedIn(email: Swift.String, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
+  @objc final public func INTERNAL_trackAppPushOpened(appPush: [Swift.String : Any])
+  @objc final public func INTERNAL_trackAppPushDelivered(appPush: [Swift.String : Any])
   @objc final public func trackAddToCart(itemId: Swift.String)
   @objc final public func trackEmptyCart()
   @nonobjc final public func trackViewCategory(category: WunderkindKit.ProductCategory)
-  @objc @available(*, deprecated, renamed: "trackLoggedIn(email:phone:)")
-  final public func trackLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod, phone: Swift.String)
-  @objc final public func trackLoggedIn(email: Swift.String, phone: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackLoggedIn(email:)")
-  final public func trackLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod)
+  @objc final public func trackLoggedIn(email: Swift.String, phone: Swift.Int)
   @objc final public func trackLoggedIn(email: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackAffiliateLoggedIn(email:phone:accountType:affiliateNumber:)")
-  final public func trackAffiliateLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
-  @objc final public func trackAffiliateLoggedIn(email: Swift.String, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackHashedLoggedIn(email:phone:)")
-  final public func trackHashedLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod, phone: Swift.String)
+  @objc final public func trackAffiliateLoggedIn(email: Swift.String, phone: Swift.Int, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
+  @objc final public func trackAffiliateLoggedIn(email: Swift.String, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
+  @objc final public func trackAffiliateLoggedInX(email: Swift.String, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
   @objc final public func trackHashedLoggedIn(email: Swift.String, phone: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackHashedLoggedIn(email:)")
-  final public func trackHashedLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod)
   @objc final public func trackHashedLoggedIn(email: Swift.String)
-  @objc @available(*, deprecated, renamed: "trackHashedAffiliateLoggedIn(email:phone:accountType:affiliateNumber:)")
-  final public func trackHashedAffiliateLoggedIn(email: Swift.String, method: WunderkindKit.LoginMethod, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
   @objc final public func trackHashedAffiliateLoggedIn(email: Swift.String, phone: Swift.String?, accountType: WunderkindKit.AccountType, affiliateNumber: Swift.String)
   @objc final public func trackLoggedOut()
   @objc final public func trackEndVisit()
+  @objc final public func trackProductChange()
+  @objc final public func trackTestya()
   @objc final public func getDeviceID() -> Swift.String
   @objc final public func trackCustom(eventName: Swift.String, extraData: [Swift.String : Swift.String])
   @objc final public func trackSelectSKU(groupId: Swift.String, feedId: Swift.String)
@@ -184,7 +167,7 @@ extension WunderkindKit.Wunderkind {
   @nonobjc final public func trackPurchase(order: WunderkindKit.Order)
   @nonobjc final public func trackRentalPurchase(order: WunderkindKit.RentalOrder)
   @objc final public func trackMultiplePurchases(orders: [WunderkindKit.CustomOrder])
-  @objc final public func trackTextOptIn(phoneNumber: Swift.String, languageCode: Swift.String?)
+  @objc final public func trackTextOptIn(phoneNumber: Swift.Int, languageCode: Swift.String?)
 }
 @available(*, unavailable)
 @objc extension WunderkindKit.Wunderkind {
@@ -197,25 +180,6 @@ extension WunderkindKit.Wunderkind {
   @objc final public func trackHotelRentalProgress(progress: WunderkindKit.HotelRentalProgress?)
   @objc final public func trackPurchase(order: WunderkindKit.Order?)
   @objc final public func trackRentalPurchase(order: WunderkindKit.RentalOrder?)
-}
-@objc public enum LoginMethod : Swift.Int, Swift.CaseIterable, Swift.Codable {
-  case email
-  case twitter
-  case facebook
-  case google
-  case apple
-  public init?(rawValue: Swift.Int)
-  public typealias AllCases = [WunderkindKit.LoginMethod]
-  public typealias RawValue = Swift.Int
-  public static var allCases: [WunderkindKit.LoginMethod] {
-    get
-  }
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-extension WunderkindKit.LoginMethod {
-  public init?(rawStringValue: Swift.String)
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class CarRentalProgress : ObjectiveC.NSObject, Swift.Codable {
   @objc final public let options: [Swift.String]
@@ -473,9 +437,6 @@ extension WunderkindKit.LogLevel {
 extension WunderkindKit.Currency : Swift.Equatable {}
 extension WunderkindKit.Currency : Swift.Hashable {}
 extension WunderkindKit.Currency : Swift.RawRepresentable {}
-extension WunderkindKit.LoginMethod : Swift.Equatable {}
-extension WunderkindKit.LoginMethod : Swift.Hashable {}
-extension WunderkindKit.LoginMethod : Swift.RawRepresentable {}
 extension WunderkindKit.AccountType : Swift.Equatable {}
 extension WunderkindKit.AccountType : Swift.Hashable {}
 extension WunderkindKit.AccountType : Swift.RawRepresentable {}

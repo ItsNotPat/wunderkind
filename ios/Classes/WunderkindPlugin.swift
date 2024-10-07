@@ -62,7 +62,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let urlStr = args["url"] as? String
       let ids = args["itemIds"] as? Array<String>
 
-      var category = WunderkindKit.ProductCategory(title: categoryName ?? "", url: URL(string: urlStr ?? "")!, itemIds: ["test_id"])
+      var category = WunderkindKit.ProductCategory(title: categoryName ?? "", url: URL(string: urlStr ?? "")!, itemIds: ids ?? [])
       
       Wunderkind.shared.trackViewCategory(category: category)
       result(nil)
@@ -72,25 +72,36 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let urlStr = args["url"] as? String
       let ids = args["itemIds"] as? Array<String>
 
-      var category = WunderkindKit.ProductCategory(title: categoryName ?? "", url: URL(string: urlStr ?? "")!, itemIds: ["test_id"])
+      var category = WunderkindKit.ProductCategory(title: categoryName ?? "", url: URL(string: urlStr ?? "")!, itemIds: ids ?? ["test_id"])
       
       Wunderkind.shared.trackViewSearch(category: category) 
       result(nil)
     case "trackLoggedIn":
       guard let args = call.arguments as? [String : Any] else {return}
-      let phone = args["phone"] as? String
+      let phone = args["phone"] as? String ?? "0"
       let email = args["email"] as? String
 
-      Wunderkind.shared.trackLoggedIn(email: email ?? "", phone: phone ?? "") 
+      let numericSet = "0123456789"
+      let filteredCharacters = phone.filter {
+        return numericSet.contains(String($0))
+      }
+      let filteredString = String(filteredCharacters)
+      Wunderkind.shared.trackLoggedIn(email: email ?? "", phone: Int(filteredString) ?? 0) 
       result(nil)
     case "trackLoggedOut":
 
       Wunderkind.shared.trackLoggedOut()
     case "trackTextOptIn":
       guard let args = call.arguments as? [String : Any] else {return}
-      let phone = args["phone"] as? String
+      let phone = args["phone"] as? String ?? "0"
 
-      Wunderkind.shared.trackTextOptIn(phoneNumber: phone ?? "", languageCode: nil) 
+      let numericSet = "0123456789"
+      let filteredCharacters = phone.filter {
+        return numericSet.contains(String($0))
+      }
+      let filteredString = String(filteredCharacters)
+
+      Wunderkind.shared.trackTextOptIn(phoneNumber: Int(filteredString) ?? 0, languageCode: nil) 
       result(nil)
     case "trackPurchase":
       guard let args = call.arguments as? [String : Any] else {return}
@@ -126,9 +137,18 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
           totalDiscount: invoiceMap["totalDiscount"] != nil ? Decimal(invoiceMap["totalDiscount"] as? Double ?? 0.0) : 0.0,
           currency: currencyType ?? .GBP
       )
+
+      let phone = customerMap["phone"] as? String ?? "0"
+     
+      let numericSet = "0123456789"
+      let filteredCharacters = phone.filter {
+        return numericSet.contains(String($0))
+      }
+      let filteredString = String(filteredCharacters)
+
       let customer = WunderkindKit.Customer(
           email: customerMap["email"] as? String ?? "",
-          phone: customerMap["phone"] as? String ?? ""
+          phone: Int(filteredString) ?? 0
       )
       var products = [WunderkindKit.Product]()
       for product in productsMap {

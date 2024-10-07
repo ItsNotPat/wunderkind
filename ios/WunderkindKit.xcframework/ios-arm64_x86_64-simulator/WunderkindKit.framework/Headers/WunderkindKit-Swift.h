@@ -362,8 +362,9 @@ SWIFT_CLASS("_TtC13WunderkindKit8Customer")
 @property (nonatomic, readonly, copy) NSString * _Nonnull email;
 @property (nonatomic, readonly, copy) NSString * _Nullable phone;
 @property (nonatomic, readonly) BOOL isHashed;
-- (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone isHashed:(BOOL)isHashed OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithHashedEmail:(NSString * _Nonnull)hashedEmail hashedPhone:(NSString * _Nonnull)hashedPhone OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithHashedEmail:(NSString * _Nonnull)hashedEmail OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email phone:(NSInteger)phone OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email isHashed:(BOOL)isHashed OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -452,14 +453,6 @@ typedef SWIFT_ENUM(NSInteger, LogLevel, open) {
   LogLevelNone = 0,
   LogLevelDebug = 1,
   LogLevelInfo = 2,
-};
-
-typedef SWIFT_ENUM(NSInteger, LoginMethod, open) {
-  LoginMethodEmail = 0,
-  LoginMethodTwitter = 1,
-  LoginMethodFacebook = 2,
-  LoginMethodGoogle = 3,
-  LoginMethodApple = 4,
 };
 
 @class Product;
@@ -646,33 +639,37 @@ SWIFT_UNAVAILABLE
 - (void)trackAppPushOptOut;
 - (void)trackAppPushOpenedWithAppPush:(UNNotification * _Nonnull)appPush;
 - (void)trackAppPushDeliveredWithAppPush:(UNNotification * _Nonnull)appPush;
-- (void)trackExistingLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone SWIFT_DEPRECATED_MSG("", "trackLoggedInEmail:phone:");
-- (void)trackExistingLoggedInEmail:(NSString * _Nonnull)email SWIFT_DEPRECATED_MSG("", "trackLoggedInEmail:");
-- (void)trackExistingAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber SWIFT_DEPRECATED_MSG("", "trackAffiliateLoggedInEmail:phone:accountType:affiliateNumber:");
-- (void)trackHashedExistingLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone SWIFT_DEPRECATED_MSG("", "trackHashedLoggedInEmail:phone:");
-- (void)trackHashedExistingLoggedInEmail:(NSString * _Nonnull)email SWIFT_DEPRECATED_MSG("", "trackHashedLoggedInEmail:");
-- (void)trackHashedExistingAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber SWIFT_DEPRECATED_MSG("", "trackHashedAffiliateLoggedInEmail:phone:accountType:affiliateNumber:");
+/// Tracks the opening of an app push notification.
+/// warning:
+/// Do not use this method directly. Use the trackAppPushOpened instead.
+/// \param appPush A dictionary containing information about the app push notification.
+///
+- (void)INTERNAL_trackAppPushOpenedWithAppPush:(NSDictionary<NSString *, id> * _Nonnull)appPush;
+/// Tracks the delivering of an app push notification.
+/// warning:
+/// Do not use this method directly. Use the trackAppPushDelivered instead.
+/// \param appPush A dictionary containing information about the app push notification.
+///
+- (void)INTERNAL_trackAppPushDeliveredWithAppPush:(NSDictionary<NSString *, id> * _Nonnull)appPush;
 - (void)trackAddToCartWithItemId:(NSString * _Nonnull)itemId;
 - (void)trackEmptyCart;
-- (void)trackLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method phone:(NSString * _Nonnull)phone SWIFT_DEPRECATED_MSG("", "trackLoggedInEmail:phone:");
-- (void)trackLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone;
-- (void)trackLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method SWIFT_DEPRECATED_MSG("", "trackLoggedInEmail:");
+- (void)trackLoggedInEmail:(NSString * _Nonnull)email phone:(NSInteger)phone;
 - (void)trackLoggedInEmail:(NSString * _Nonnull)email;
-- (void)trackAffiliateLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber SWIFT_DEPRECATED_MSG("", "trackAffiliateLoggedInEmail:phone:accountType:affiliateNumber:");
-- (void)trackAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
-- (void)trackHashedLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method phone:(NSString * _Nonnull)phone SWIFT_DEPRECATED_MSG("", "trackHashedLoggedInEmail:phone:");
+- (void)trackAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSInteger)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
+- (void)trackAffiliateLoggedInEmail:(NSString * _Nonnull)email accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
+- (void)trackAffiliateLoggedInXWithEmail:(NSString * _Nonnull)email accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
 - (void)trackHashedLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone;
-- (void)trackHashedLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method SWIFT_DEPRECATED_MSG("", "trackHashedLoggedInEmail:");
 - (void)trackHashedLoggedInEmail:(NSString * _Nonnull)email;
-- (void)trackHashedAffiliateLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber SWIFT_DEPRECATED_MSG("", "trackHashedAffiliateLoggedInEmail:phone:accountType:affiliateNumber:");
 - (void)trackHashedAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
 - (void)trackLoggedOut;
 - (void)trackEndVisit;
+- (void)trackProductChange;
+- (void)trackTestya;
 - (NSString * _Nonnull)getDeviceID SWIFT_WARN_UNUSED_RESULT;
 - (void)trackCustomWithEventName:(NSString * _Nonnull)eventName extraData:(NSDictionary<NSString *, NSString *> * _Nonnull)extraData;
 - (void)trackSelectSKUWithGroupId:(NSString * _Nonnull)groupId feedId:(NSString * _Nonnull)feedId;
 - (void)trackMultiplePurchasesWithOrders:(NSArray<CustomOrder *> * _Nonnull)orders;
-- (void)trackTextOptInPhoneNumber:(NSString * _Nonnull)phoneNumber languageCode:(NSString * _Nullable)languageCode;
+- (void)trackTextOptInPhoneNumber:(NSInteger)phoneNumber languageCode:(NSString * _Nullable)languageCode;
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -1044,8 +1041,9 @@ SWIFT_CLASS("_TtC13WunderkindKit8Customer")
 @property (nonatomic, readonly, copy) NSString * _Nonnull email;
 @property (nonatomic, readonly, copy) NSString * _Nullable phone;
 @property (nonatomic, readonly) BOOL isHashed;
-- (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone isHashed:(BOOL)isHashed OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithHashedEmail:(NSString * _Nonnull)hashedEmail hashedPhone:(NSString * _Nonnull)hashedPhone OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithHashedEmail:(NSString * _Nonnull)hashedEmail OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email phone:(NSInteger)phone OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email isHashed:(BOOL)isHashed OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1134,14 +1132,6 @@ typedef SWIFT_ENUM(NSInteger, LogLevel, open) {
   LogLevelNone = 0,
   LogLevelDebug = 1,
   LogLevelInfo = 2,
-};
-
-typedef SWIFT_ENUM(NSInteger, LoginMethod, open) {
-  LoginMethodEmail = 0,
-  LoginMethodTwitter = 1,
-  LoginMethodFacebook = 2,
-  LoginMethodGoogle = 3,
-  LoginMethodApple = 4,
 };
 
 @class Product;
@@ -1328,33 +1318,37 @@ SWIFT_UNAVAILABLE
 - (void)trackAppPushOptOut;
 - (void)trackAppPushOpenedWithAppPush:(UNNotification * _Nonnull)appPush;
 - (void)trackAppPushDeliveredWithAppPush:(UNNotification * _Nonnull)appPush;
-- (void)trackExistingLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone SWIFT_DEPRECATED_MSG("", "trackLoggedInEmail:phone:");
-- (void)trackExistingLoggedInEmail:(NSString * _Nonnull)email SWIFT_DEPRECATED_MSG("", "trackLoggedInEmail:");
-- (void)trackExistingAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber SWIFT_DEPRECATED_MSG("", "trackAffiliateLoggedInEmail:phone:accountType:affiliateNumber:");
-- (void)trackHashedExistingLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone SWIFT_DEPRECATED_MSG("", "trackHashedLoggedInEmail:phone:");
-- (void)trackHashedExistingLoggedInEmail:(NSString * _Nonnull)email SWIFT_DEPRECATED_MSG("", "trackHashedLoggedInEmail:");
-- (void)trackHashedExistingAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber SWIFT_DEPRECATED_MSG("", "trackHashedAffiliateLoggedInEmail:phone:accountType:affiliateNumber:");
+/// Tracks the opening of an app push notification.
+/// warning:
+/// Do not use this method directly. Use the trackAppPushOpened instead.
+/// \param appPush A dictionary containing information about the app push notification.
+///
+- (void)INTERNAL_trackAppPushOpenedWithAppPush:(NSDictionary<NSString *, id> * _Nonnull)appPush;
+/// Tracks the delivering of an app push notification.
+/// warning:
+/// Do not use this method directly. Use the trackAppPushDelivered instead.
+/// \param appPush A dictionary containing information about the app push notification.
+///
+- (void)INTERNAL_trackAppPushDeliveredWithAppPush:(NSDictionary<NSString *, id> * _Nonnull)appPush;
 - (void)trackAddToCartWithItemId:(NSString * _Nonnull)itemId;
 - (void)trackEmptyCart;
-- (void)trackLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method phone:(NSString * _Nonnull)phone SWIFT_DEPRECATED_MSG("", "trackLoggedInEmail:phone:");
-- (void)trackLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone;
-- (void)trackLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method SWIFT_DEPRECATED_MSG("", "trackLoggedInEmail:");
+- (void)trackLoggedInEmail:(NSString * _Nonnull)email phone:(NSInteger)phone;
 - (void)trackLoggedInEmail:(NSString * _Nonnull)email;
-- (void)trackAffiliateLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber SWIFT_DEPRECATED_MSG("", "trackAffiliateLoggedInEmail:phone:accountType:affiliateNumber:");
-- (void)trackAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
-- (void)trackHashedLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method phone:(NSString * _Nonnull)phone SWIFT_DEPRECATED_MSG("", "trackHashedLoggedInEmail:phone:");
+- (void)trackAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSInteger)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
+- (void)trackAffiliateLoggedInEmail:(NSString * _Nonnull)email accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
+- (void)trackAffiliateLoggedInXWithEmail:(NSString * _Nonnull)email accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
 - (void)trackHashedLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone;
-- (void)trackHashedLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method SWIFT_DEPRECATED_MSG("", "trackHashedLoggedInEmail:");
 - (void)trackHashedLoggedInEmail:(NSString * _Nonnull)email;
-- (void)trackHashedAffiliateLoggedInEmail:(NSString * _Nonnull)email method:(enum LoginMethod)method phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber SWIFT_DEPRECATED_MSG("", "trackHashedAffiliateLoggedInEmail:phone:accountType:affiliateNumber:");
 - (void)trackHashedAffiliateLoggedInEmail:(NSString * _Nonnull)email phone:(NSString * _Nullable)phone accountType:(enum AccountType)accountType affiliateNumber:(NSString * _Nonnull)affiliateNumber;
 - (void)trackLoggedOut;
 - (void)trackEndVisit;
+- (void)trackProductChange;
+- (void)trackTestya;
 - (NSString * _Nonnull)getDeviceID SWIFT_WARN_UNUSED_RESULT;
 - (void)trackCustomWithEventName:(NSString * _Nonnull)eventName extraData:(NSDictionary<NSString *, NSString *> * _Nonnull)extraData;
 - (void)trackSelectSKUWithGroupId:(NSString * _Nonnull)groupId feedId:(NSString * _Nonnull)feedId;
 - (void)trackMultiplePurchasesWithOrders:(NSArray<CustomOrder *> * _Nonnull)orders;
-- (void)trackTextOptInPhoneNumber:(NSString * _Nonnull)phoneNumber languageCode:(NSString * _Nullable)languageCode;
+- (void)trackTextOptInPhoneNumber:(NSInteger)phoneNumber languageCode:(NSString * _Nullable)languageCode;
 @end
 
 #if __has_attribute(external_source_symbol)

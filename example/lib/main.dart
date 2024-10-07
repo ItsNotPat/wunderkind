@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
               ElevatedButton(
                 onPressed: () {
                   const WunderkindCustomer customer = WunderkindCustomer(
-                    phone: 'phone',
+                    phone: "+63123123123",
                     email: 'test@test.com',
                   );
                   Wunderkind.trackLoggedIn(customer);
@@ -151,7 +151,7 @@ class _MyAppState extends State<MyApp> {
                     ],
                     customer: const WunderkindCustomer(
                       email: "test@test.com",
-                      phone: "phone",
+                      phone: "+63123123123",
                     ),
                   );
                   Wunderkind.trackPurchase(order);
@@ -160,7 +160,7 @@ class _MyAppState extends State<MyApp> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Wunderkind.trackTextOptIn(phone: 'phone');
+                  Wunderkind.trackTextOptIn(phone: "+63123123123");
                 },
                 child: const Text("Track Opt Int"),
               ),
