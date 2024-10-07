@@ -143,13 +143,13 @@ class WunderkindPlugin: FlutterPlugin, MethodCallHandler {
         var phoneStr = customerMap["phone"] as String;
 
         if(phoneStr.startsWith("+")) {
-          phoneStr = phone.drop(1)
+          phoneStr = phoneStr.drop(1)
         }
 
         val phoneLong = phoneStr.toLong()
 
 
-        val customer : Customer = Customer(
+        val customer : Customer = Customer.createCustomer(
             customerMap["email"] as String,
             phoneLong,
         );
