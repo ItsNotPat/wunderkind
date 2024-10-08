@@ -72,7 +72,7 @@ public class WunderkindPlugin: NSObject, FlutterPlugin {
       let urlStr = args["url"] as? String
       let ids = args["itemIds"] as? Array<String>
 
-      var category = WunderkindKit.ProductCategory(title: categoryName ?? "", url: URL(string: urlStr ?? "")!, itemIds: ids ?? ["test_id"])
+      var category = WunderkindKit.ProductCategory(title: categoryName ?? "", url: URL(string: urlStr ?? "")!, itemIds: ids ?? [])
       
       Wunderkind.shared.trackViewSearch(category: category) 
       result(nil)
